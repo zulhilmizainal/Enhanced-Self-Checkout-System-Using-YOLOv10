@@ -15,7 +15,7 @@ model = YOLO(os.path.join("runs", "datasets", "best.pt"))
 
 # Load product prices from CSV
 product_prices = {}
-with open("ProductData.csv", newline='', encoding="utf-8") as csvfile:
+with open(os.path.join("runs", "datasets", "ProductData.csv"), newline='', encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         name = row["product_name"].strip()
