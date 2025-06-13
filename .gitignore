@@ -1,3 +1,4 @@
+@@ -1,194 +1,116 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -75,6 +76,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
+# IPython Notebook
 .ipynb_checkpoints
 
 # IPython
@@ -122,6 +124,7 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
+.python-version
 
 # SageMath parsed files
 *.sage.py
@@ -182,6 +185,7 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore# VS Code settings
+# VS Code settings
 .vscode/
 
 # Custom additions by Zul
