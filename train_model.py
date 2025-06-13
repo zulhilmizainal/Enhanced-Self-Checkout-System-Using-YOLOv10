@@ -1,11 +1,12 @@
 from ultralytics import YOLO
+import os
 
 # Load a pretrained YOLOv10 model
 model = YOLO("yolov10b.pt")  
 
 # Train the model
 model.train(
-    data="yolov10_custom.yaml",  # dataset config
+    data=os.path.join("runs", "datasets", "yolov10_custom.yaml"),  # dataset config
     epochs=50,                   # can reduce/increase
     imgsz=640,                   # image size (default is 640)
     batch=8,                     # for CPU training, keep small
