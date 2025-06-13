@@ -194,4 +194,5 @@ Non Functional Testing/
 HEIC to JPEG/
 runs/
 **/__pycache__/
+**/datasets/
 *.pt
