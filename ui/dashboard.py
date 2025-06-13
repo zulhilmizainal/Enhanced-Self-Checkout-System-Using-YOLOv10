@@ -1,7 +1,7 @@
 # ui/dashboard.py
 import tkinter as tk
 from ui.scanner import start_scanner
-from ui.product_upload import open_product_upload
+from ui.manage_yolo_training import open_product_upload
 from ui.sales_view import view_sales_transactions
 from utils.helpers import center_window
 

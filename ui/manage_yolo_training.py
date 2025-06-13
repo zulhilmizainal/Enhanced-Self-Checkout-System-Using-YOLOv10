@@ -1,4 +1,4 @@
-# ui/product_upload.py
+# ui/manage_yolo_training.py
 import tkinter as tk
 from tkinter import messagebox
 import os
@@ -14,7 +14,7 @@ def open_product_upload(parent_window):
             window.destroy()
 
     product_window = tk.Toplevel()
-    product_window.title("Manage Product Files")
+    product_window.title("Manage YOLO Training")
     product_window.geometry("600x400")
     center_window(product_window, 600, 400)
 
@@ -25,7 +25,7 @@ def open_product_upload(parent_window):
 
     # Open folders
     tk.Button(button_frame, text="📁 Open Training Folder", width=35,
-              command=lambda: open_folder("datasets")).pack(pady=5)
+              command=lambda: open_folder(os.path.join("runs", "datasets"))).pack(pady=5)
 
     # Train button
     tk.Button(button_frame, text="🧠 Train YOLOv10", width=35, bg="#007acc", fg="white", font=("Helvetica", 10, "bold"),

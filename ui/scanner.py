@@ -8,9 +8,10 @@ import csv
 from utils.cart import add_to_cart
 from tkinter import messagebox
 from utils.scanner_state import scanner_context
+import os
 
 # Load YOLO model
-model = YOLO("best.pt")
+model = YOLO(os.path.join("runs", "datasets", "best.pt"))
 
 # Load product prices from CSV
 product_prices = {}
