@@ -1,6 +1,7 @@
 import sqlite3
+from utils.helpers import resource_path
 
-DB_NAME = "sales.db"
+DB_NAME = resource_path("sales.db")
 
 def connect_db():
     return sqlite3.connect(DB_NAME)
