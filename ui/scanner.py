@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import cv2
 from ui.display_scanned import display_scanned_items
-from utils.helpers import center_window
+from utils.helpers import center_window, resource_path
 from ultralytics import YOLO
 import csv
 from utils.cart import add_to_cart
@@ -11,11 +11,11 @@ from utils.scanner_state import scanner_context
 import os
 
 # Load YOLO model
-model = YOLO(os.path.join("runs", "datasets", "best.pt"))
+model = YOLO(resource_path(os.path.join("runs", "datasets", "best.pt")))
 
 # Load product prices from CSV
 product_prices = {}
-with open(os.path.join("runs", "datasets", "ProductData.csv"), newline='', encoding="utf-8") as csvfile:
+with open(resource_path(os.path.join("runs", "datasets", "ProductData.csv")), newline='', encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         name = row["product_name"].strip()
