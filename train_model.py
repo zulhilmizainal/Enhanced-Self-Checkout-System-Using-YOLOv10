@@ -3,7 +3,7 @@ import os
 from utils.helpers import resource_path
 
 # Load a pretrained YOLOv10 model
-model = YOLO("yolov10b.pt")
+model = YOLO(os.path.join("runs", "datasets", "yolov10b.pt"))
 
 # Train the model
 model.train(
