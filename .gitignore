@@ -197,4 +197,3 @@ runs/
 **/datasets/
 *.pt
 *.db
-!sales.db
