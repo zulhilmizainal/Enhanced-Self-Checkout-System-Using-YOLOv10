@@ -56,8 +56,15 @@ def start_scanner(root):
     button_frame = tk.Frame(scanner_window)
     button_frame.pack(pady=10)
 
+    def pay_and_show_items():
+        cap.release()
+        scanner_window.destroy()
+        scanner_context["cap"] = None
+        scanner_context["window"] = None
+        display_scanned_items(root)
+
     tk.Button(button_frame, text="Pay", width=15,
-              command=lambda: display_scanned_items(scanner_window)).grid(row=0, column=0, padx=10)
+              command=pay_and_show_items).grid(row=0, column=0, padx=10)
 
     def add_detected_item():
         nonlocal current_frame_detections
@@ -131,6 +138,8 @@ def start_scanner(root):
     def on_close():
         cap.release()
         scanner_window.destroy()
+        scanner_context["cap"] = None
+        scanner_context["window"] = None
         root.deiconify()
 
     scanner_window.protocol("WM_DELETE_WINDOW", on_close)
