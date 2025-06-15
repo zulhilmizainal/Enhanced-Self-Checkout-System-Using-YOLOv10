@@ -196,4 +196,4 @@ runs/
 **/__pycache__/
 **/datasets/
 *.pt
-*.db
+**/.db
