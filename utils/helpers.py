@@ -11,6 +11,7 @@ def center_window(window, width, height):
     window.geometry(f"{width}x{height}+{x}+{y}")
 
 
-def resource_path(relative):
-    base = getattr(sys, "_MEIPASS", os.path.abspath("."))
-    return os.path.join(base, relative)
+def resource_path(relative_path: str) -> str:
+    """Return absolute path to resource, compatible with PyInstaller."""
+    base_path = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
+    return os.path.join(base_path, relative_path)
