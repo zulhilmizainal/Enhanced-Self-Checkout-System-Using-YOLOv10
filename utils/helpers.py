@@ -13,5 +13,10 @@ def center_window(window, width, height):
 
 def resource_path(relative_path: str) -> str:
     """Return absolute path to resource, compatible with PyInstaller."""
-    base_path = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
+    # Resolve to the project root (one level above this file's directory)
+    base_path = getattr(
+        sys,
+        "_MEIPASS",
+        os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)),
+    )
     return os.path.join(base_path, relative_path)
