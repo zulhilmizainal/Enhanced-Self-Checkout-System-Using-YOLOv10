@@ -86,8 +86,8 @@ def start_scanner(root):
 
     tk.Button(button_frame, text="Add to Cart", width=15, command=add_detected_item).grid(row=0, column=1, padx=10)
 
-    # Index 0 because using IVCam (iphone camera not webcam)
-    cap = cv2.VideoCapture(0)
+    # Index 1 because using IVCam (iphone camera not webcam)
+    cap = cv2.VideoCapture(1)
     scanner_context["cap"] = cap
 
     def update_frame():

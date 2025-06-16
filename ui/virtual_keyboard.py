@@ -130,7 +130,7 @@ def open_virtual_keyboard(total, parent=None, root=None):
 
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(min_detection_confidence=0.7)
-    cap = cv2.VideoCapture(1) # Use the webcam camera
+    cap = cv2.VideoCapture(0) # Use the webcam camera
 
     # Set camera resolution to 1280x720
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
