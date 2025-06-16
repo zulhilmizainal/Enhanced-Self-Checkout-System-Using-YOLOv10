@@ -7,6 +7,7 @@ from utils.sales_db import insert_sale
 from utils.cart import get_cart, clear_cart
 from ui.receipt import open_receipt_window
 import winsound
+from pygrabber.dshow_graph import FilterGraph
 
 # Layout
 key_layout = [
@@ -21,6 +22,15 @@ final_text = ""
 total_price = 0
 keyboard_parent = None
 keyboard_root = None
+
+# 🧠 Find webcam index by partial name
+def get_camera_index_by_name(partial_name):
+    graph = FilterGraph()
+    devices = graph.get_input_devices()
+    for i, name in enumerate(devices):
+        if partial_name.lower() in name.lower():
+            return i
+    return 0  # fallback
 
 def draw_keys(frame, hovered_key=None):
     h, w, _ = frame.shape
@@ -128,13 +138,15 @@ def open_virtual_keyboard(total, parent=None, root=None):
     keyboard_parent = parent
     keyboard_root = root
 
-    mp_hands = mp.solutions.hands
-    hands = mp_hands.Hands(min_detection_confidence=0.7)
-    cap = cv2.VideoCapture(0) # Use the webcam camera
+    # ✅ Auto-select the real webcam (not iVCam) by name
+    cam_index = get_camera_index_by_name("webcam")  # or use "USB2.0 FHD"
+    cap = cv2.VideoCapture(cam_index)
 
-    # Set camera resolution to 1280x720
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+    mp_hands = mp.solutions.hands
+    hands = mp_hands.Hands(min_detection_confidence=0.7)
 
     cv2.namedWindow("Virtual Keyboard", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty("Virtual Keyboard", cv2.WND_PROP_AUTOSIZE, 1)
@@ -178,27 +190,11 @@ def open_virtual_keyboard(total, parent=None, root=None):
 
         draw_keys(frame, hovered_key)
 
-        # Instruction label shown in red at the top of the screen
-        cv2.putText(
-            frame,
-            "Enter Credit/Debit Card Number",
-            (50, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1.0,
-            (0, 0, 255),
-            2,
-        )
+        cv2.putText(frame, "Enter Credit/Debit Card Number", (50, 40),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 2)
 
-        # Display the numbers entered so far
-        cv2.putText(
-            frame,
-            final_text,
-            (50, 80),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1.4,
-            (0, 0, 255),
-            3,
-        )
+        cv2.putText(frame, final_text, (50, 80),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3)
 
         cv2.imshow("Virtual Keyboard", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
