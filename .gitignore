@@ -197,3 +197,4 @@ runs/
 **/datasets/
 *.pt
 *.db
+*.ps1
