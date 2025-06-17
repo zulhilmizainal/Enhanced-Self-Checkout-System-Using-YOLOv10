@@ -31,9 +31,9 @@ def train_yolo_model(callback=None):
 
     model.train(
         data=data_path,
-        epochs=2,
+        epochs=1,
         imgsz=640,
-        batch=8,
+        batch=4,
         patience=20
     )
 
