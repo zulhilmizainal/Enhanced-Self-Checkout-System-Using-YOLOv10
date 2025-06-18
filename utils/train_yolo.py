@@ -34,46 +34,24 @@ def train_yolo_model(callback=None):
         epochs=1,
         imgsz=640,
         batch=4,
-        patience=20
+        patience=20,
+        project=resource_path("runs"),  # ✅ saves to dist/runs/
+        name="detect",                  # ✅ folder name will be detect/
+        exist_ok=True                   # ✅ avoids folder exists error
     )
+
+    # model.train(
+    #     data=data_path,
+    #     epochs=1,
+    #     imgsz=640,
+    #     batch=4,
+    #     patience=20,
+    #     project=os.path.dirname(data_path),  # this resolves to runs/datasets
+    #     name="detect",  # this will ensure the new best.pt goes into runs/datasets/detect
+    #     exist_ok=True  # avoid errors if detect folder already exists
+    # )
 
     log("Training complete. Evaluating model...")
     model.val()
     model.val(split='test')
     log("Training and evaluation finished.")
-
-
-# from ultralytics import YOLO
-# import os
-# from utils.helpers import resource_path
-
-
-# def train_yolo_model(callback=None):
-#     """Train YOLOv10 model and report progress via callback."""
-
-#     def log(message):
-#         if callback:
-#             callback(message)
-#         else:
-#             print(message)
-
-#     log("Starting training...")
-#     weights_path = resource_path(os.path.join("runs", "datasets", "yolov10b.pt"))
-#     data_path = resource_path(os.path.join("runs", "datasets", "yolov10_custom.yaml"))
-
-#     log("Loading model...")
-#     model = YOLO(weights_path)
-#     log("Model loaded. Beginning training...")
-
-#     model.train(
-#         data=data_path,
-#         epochs=2,
-#         imgsz=640,
-#         batch=8,
-#         patience=20
-#     )
-
-#     log("Training complete. Evaluating model...")
-#     model.val()
-#     model.val(split='test')
-#     log("Training and evaluation finished.")
