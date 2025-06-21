@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox
 import os
 import subprocess
-from utils.helpers import center_window
+from utils.helpers import center_window, resource_path
 from tkinter import ttk
 import threading
 import platform
@@ -78,7 +78,7 @@ def open_product_upload(parent_window):
 
 
 def open_folder(path):
-    abs_path = os.path.abspath(path)
+    abs_path = resource_path(path)
     os.makedirs(abs_path, exist_ok=True)
     if platform.system() == "Windows":
         os.startfile(abs_path)

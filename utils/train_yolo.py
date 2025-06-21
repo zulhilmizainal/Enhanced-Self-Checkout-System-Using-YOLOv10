@@ -25,6 +25,9 @@ def train_yolo_model(callback=None):
     weights_path = resource_path(os.path.join("runs", "datasets", "yolov10b.pt"))
     data_path = resource_path(os.path.join("runs", "datasets", "yolov10_custom.yaml"))
 
+    project_dir = resource_path("runs")
+    os.makedirs(project_dir, exist_ok=True)
+
     log("Loading model...")
     model = YOLO(weights_path)
     log("Model loaded. Beginning training...")
@@ -35,7 +38,7 @@ def train_yolo_model(callback=None):
         imgsz=640,
         batch=4,
         patience=20,
-        project=resource_path("runs"),  # ✅ saves to dist/runs/
+        project=project_dir,             # ✅ saves to dist/runs/
         name="detect",                  # ✅ folder name will be detect/
         exist_ok=True                   # ✅ avoids folder exists error
     )
