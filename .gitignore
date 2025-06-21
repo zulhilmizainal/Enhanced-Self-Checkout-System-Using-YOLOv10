@@ -189,9 +189,9 @@ cython_debug/
 .vscode/
 
 # Custom additions by Zul
-Functional Testing/
-Non Functional Testing/
-HEIC to JPEG/
+Functional_Testing/
+Non_Functional_Testing/
+HEIC_to_JPEG/
 runs/
 **/__pycache__/
 **/datasets/
