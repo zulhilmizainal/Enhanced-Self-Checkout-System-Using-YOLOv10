@@ -1,10 +1,13 @@
 import sqlite3
+import os
 
 from utils.helpers import resource_path
 
 # Determine the absolute path to the bundled database so PyInstaller
 # executables can locate it regardless of the current working directory.
-DB_NAME = resource_path("sales.db")
+# DB_NAME = resource_path("sales.db")
+DB_NAME = resource_path(os.path.join("runs", "datasets", "sales.db"))
+
 
 def connect_db():
     return sqlite3.connect(DB_NAME)
