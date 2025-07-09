@@ -34,3 +34,7 @@ With these files present, the program can run entirely from inside `dist/` becau
 
 Double‑click `SelfCheckout.exe` (or run it from the command line) from inside `dist/`. The login screen should appear and all features—including scanning, training and database updates—will operate using the files located within `dist/`.
 
+## Confidence threshold
+
+When scanning items, the application only accepts predictions whose confidence score is at least `0.6`. If no high-confidence object is detected, the user is asked to rescan the item.
+

@@ -10,6 +10,9 @@ from tkinter import messagebox
 from utils.scanner_state import scanner_context
 import os
 
+# Only accept detections with confidence above this value
+CONFIDENCE_THRESHOLD = 0.6
+
 # Load YOLO model
 model = YOLO(resource_path(os.path.join("runs", "datasets", "best.pt")))
 
@@ -69,7 +72,10 @@ def start_scanner(root):
     def add_detected_item():
         nonlocal current_frame_detections
         if not current_frame_detections:
-            messagebox.showinfo("Info", "No items detected to add.")
+            messagebox.showinfo(
+                "Info",
+                "No high-confidence items detected. Please rescan."
+            )
             return
 
         added_items = []
@@ -96,7 +102,7 @@ def start_scanner(root):
         frame = cv2.resize(frame, (640, 480))
 
         if ret:
-            results = model.predict(frame, imgsz=640, conf=0.5, verbose=False)
+            results = model.predict(frame, imgsz=640, conf=0.25, verbose=False)
 
             current_frame_detections.clear()
             detected_summary = []
@@ -104,6 +110,8 @@ def start_scanner(root):
             for box in results[0].boxes:
                 cls_id = int(box.cls[0])
                 conf = float(box.conf[0])
+                if conf < CONFIDENCE_THRESHOLD:
+                    continue
                 label = results[0].names[cls_id]
                 last_detected_label = label
                 current_frame_detections.add(label)
