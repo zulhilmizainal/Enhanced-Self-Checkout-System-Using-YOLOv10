@@ -43,17 +43,6 @@ def train_yolo_model(callback=None):
         exist_ok=True                   # ✅ avoids folder exists error
     )
 
-    # model.train(
-    #     data=data_path,
-    #     epochs=1,
-    #     imgsz=640,
-    #     batch=4,
-    #     patience=20,
-    #     project=os.path.dirname(data_path),  # this resolves to runs/datasets
-    #     name="detect",  # this will ensure the new best.pt goes into runs/datasets/detect
-    #     exist_ok=True  # avoid errors if detect folder already exists
-    # )
-
     log("Training complete. Evaluating model...")
     model.val()
     model.val(split='test')
