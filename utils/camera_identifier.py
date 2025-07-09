@@ -1,3 +1,5 @@
+# this script is just to help identify all the camera ports available
+# to not make mistake when setting the camera index that should be used
 import cv2
 from pygrabber.dshow_graph import FilterGraph
 
