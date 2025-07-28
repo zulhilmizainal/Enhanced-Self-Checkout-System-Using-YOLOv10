@@ -62,7 +62,7 @@ def draw_keys(frame, hovered_key=None):
 
     # Row 2 — Clear, Enter, Delete
     btn_width = 130
-    y1 = int(h * 0.50)
+    y1 = int(h * 0.75)
     y2 = y1 + key_height
 
     # Clear (left)
